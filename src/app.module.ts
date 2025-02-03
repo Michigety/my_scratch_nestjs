@@ -6,25 +6,33 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { UserEntity } from './user/user.entity';
 import { UsersModule } from './user/users.module';
-import * as dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+require('dotenv').config();
+
+console.log(process.env.AZURE_DB_SSL);
+
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [UserEntity],
-      synchronize: true,
+      synchronize: false,
       // 그 외 설정 및 기본값
       // retryAttempts: 10,
       // retryDelay: 3000,
       // autoLoadEntities: false,
+      ssl: process.env.AZURE_DB_SSL
+        ? {
+            ca: process.env.AZURE_DB_SSL,
+          }
+        : false
     }),
     UsersModule
   ],
