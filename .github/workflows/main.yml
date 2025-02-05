@@ -73,7 +73,7 @@ jobs:
 
           ssh -i $HOME/$PEM_KEY_FILE -o StrictHostKeyChecking=no $VM_SSH_ADDR "sudo systemctl stop medly.service; rm -rf $UPLOAD_PATH/*"
           scp -i $HOME/$PEM_KEY_FILE -o StrictHostKeyChecking=no -r ./helloworld-$CURRENT_DATE.zip azureuser@20.55.199.98:$UPLOAD_PATH/
-          ssh -i $HOME/$PEM_KEY_FILE -o StrictHostKeyChecking=no $VM_SSH_ADDR "unzip $UPLOAD_PATH/helloworld-$CURRENT_DATE.zip; sudo systemctl start medly; sudo systemctl restart nginx"
+          ssh -i $HOME/$PEM_KEY_FILE -o StrictHostKeyChecking=no $VM_SSH_ADDR "unzip $UPLOAD_PATH/helloworld-$CURRENT_DATE.zip -d $UPLOAD_PATH; sudo systemctl start medly; sudo systemctl restart nginx"
 
       # Samples
       # # Runs a single command using the runners shell
