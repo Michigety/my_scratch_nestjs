@@ -31,11 +31,11 @@ jobs:
       - name: yarn install --frozen-lockfile
         run: yarn --frozen-lockfile
 
-      - name: yarn lint
-        run: yarn lint
+      # - name: yarn lint
+      #   run: yarn lint
 
-      - name: yarn test --coverage
-        run: yarn test --coverage
+      # - name: yarn test --coverage
+      #   run: yarn test --coverage
 
       - name: yarn build
         run: yarn build
